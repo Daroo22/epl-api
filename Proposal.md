@@ -1,31 +1,38 @@
-# my game proposal
+# my API proposal
 
-For the first Project, I am building a connect four game. This game will potentially allow users to either enjoy it with friends or play against AI. This game will have a board of 6 by 7, giving the players enough space to plan strategic moves. At the end of this project, the playes will be able to clearly see the highlight of yhe winning match, hear sounds when they win, and track how many wins they have.
+For the second Project, I am building a Soccer API. This API will allow users to interact with their favorite premier league data, including match results, team stats, and player information. This API will also allow users to add players as their favorites to make it easy to access players they are interested in.
 
- ![connect4Board](./Assets/Digital%20Connect%204%20for%20Projector.jpg)  ![connect4Win](./Assets/Traditional-Connect-Four-Here-Red-wins-with-four-coins-aligned-diagonally.png.jpeg)  ![connect4Tie](./Assets/main-qimg-dfa731632130a8e12f78dca5f846828a.webp)
-
+ ![Wireframes](./Assets/signIn.png) ![welcomeUser](./Assets/Welcome.png) ![create](./Assets/Screenshot%202024-08-02%20at%204.09.58 PM.png) 
 ## User Stories
 
- - *As a player i want to be able to play connect four and have fun with my friends*
-- *As a player, i want to see the game board clearly displayed*
-- *As a player, i want to be able to choose my color (yellow or red) at the start of the game* 
-- *As a player, i want to be able to drop disc into one of the columns*
-- *As a player, i want to be able to see the disc occupy the lowest space within the column*
-- *The game should randomly select which player gets the first turn*
-- *As a player, i want to be able to switch turns between players*
-- *As a player, i want to be able to tell who's turn it is*
-- *The player should be able to clearly see who wins the round*
-- *As a player, i want to be able to restart the game when a round is won*
-- *If the grid is completely filled and no player has connected four discs, the game should declare a draw.* 
-- *As a player I want to be able to win diagonally, hortizontally and vertically*
+ - *As a user, I want to be able to view a list of my favorite players, so that I can see all the players I am most interested in without having to search for them every time*
+- *As a user, I want to be able to add players to my list of favorite players, so that I can quickly access their details and updates*
+- *As a User, i want to be able to search for players,when i find a player, i want to be able to add them to my favorites.* 
+- *As a user, i want to have the option to remove my favorite player*
+- *As a user, I want to see immediate updates to my list of favorite players whenever I add or remove players, so that my list always reflects my current interests.*
+- *As a user, if I attempt to add or remove players from my favorites list while not being logged in, I want to receive an error message informing me that I need to log in first*
 
 
 
 ### Stretch Goals
-- [] As a player, i want to be able to play against CP
-- [] As a player, i want to hear sound effect for dropping disc and winning moves
-- [] As a player, i want to see how many wins each player has
-- [] As a player i want to see the winning lines Highlighed
+- [] As a User, i want to be able to click on a player and see his season stats
+- [] As a User, i want to be able to create a fantasy team based on my favorite players
+
+
+# Route Table
+
+| **Route**                        | **Method** | **Description**                                            | **Controller Function**  |
+|----------------------------------|------------|------------------------------------------------------------|--------------------------|
+| /Auth/signup                          | POST       | Create a new user account.                                | `signupUser`            |
+| /Auth/login                           | POST       | Log in an existing user.                                  | `loginUser`             |
+| /users/:userId/favorites          | GET        | Retrieve a list of favorite players for the user.         | `getFavoritePlayers`     |
+| /users/:userId/favorites/addNew   | POST       | Add a player to the user's list of favorite players.      | `addFavoritePlayer`      |
+| /users/:userId/favorites/:playerId| DELETE     | Remove a player from the user's list of favorite players. | `removeFavoritePlayer`   |
+
+
+## ERD
+
+![Erd](./Assets/ERD.png)
 
 
 
@@ -33,64 +40,21 @@ For the first Project, I am building a connect four game. This game will potenti
 
 
 
-## pseudocode 
-
-// Set up html
-
-// command !
-
-// link JS and CSS
-
-// Add the title 'Connect 4'
-
-//Add a h1 tag on the body called 'connect 4'
-
-// Add an Id that will track the winner
-
-// Add another Id for the board
-
-### Set up CSS
-// Add body fonts family
-
-// Add height and width size for the board (6 by 7 board)
-
-// Add borders
+## Plan of Attack
 
 
-### Set up JS
+|    Day        |                           Task                            |
+|:---------:    |:--------------------------------------------------------: |
+|   Friday      | Create and present proposal                               |
+|  Saturday     | Create ejs, css, js files, and create basic structure.    |
+|   Sunday      | Begin functions                                           |
+|   Monday      | Continue functions                                        |
+|  Tuesday      | Add CSS                                                   |
+| Wednesday     | Finalize functions                                        |
+|  Thursday     | Review project with instructor                            |
+|   Friday      | Overview and launch project                               |
+|  Saturday     | Review/Stretch goals                                      |
+|   Sunday      | Review/Stretch goals                                      |
+|   Monday      | Present Project                                           |
 
-// set consts
-
-// set variables
-
-// Display empty board
-
-// set current player to 'Red'
-
-// set function to handle column (if column is not full, drop the disk in the lowest part of the column)
-
-// After that, check for wins (for )
-
-// If Yes, end game and display ("red wins")
-
-// if no wins, switch turn
-
-// Else (which means column is full) display 'its a draw'
-
-// Set function to checkWin (for each row, column in board)
-
-// IF currentPlayer has 4 consecutive discs in any direction (horizontal, vertical, diagonal) RETURN true
-
-// If not, swith player (or its a draw)
-
-// set function to check if Board is full for each column in the top row of the board
-
-// IF column is empty then return false else return true
-
-// set function to switch Player if currentPlayer is 'Red' then set current Player to 'Yellow' else set current Player to 'Red'
-
-// Game Loop; while game is not over display 'currentPlayer's turn'
-
-// Wait for player to select a column then switch player turn
-
-// set function for reset Game; reset the board to empty values, SET currentPlayer to 'Red' then restart the game loop.
+ 
