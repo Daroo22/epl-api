@@ -68,6 +68,15 @@ app.get('/', async (req, res) => {
   })
 }) 
 
+app.get('/players', async (req, res) => {
+  try {
+    const players = await getAllPlayers();
+    res.render('players', { players });
+  } catch (error) {
+    res.status(500).send('Error retrieving players');
+  }
+});
+
 
 app.use('/auth', authController)
 
