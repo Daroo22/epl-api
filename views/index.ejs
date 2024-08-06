@@ -1,5 +1,3 @@
-<!-- views/index.ejs -->
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -11,21 +9,26 @@
     <% if (user) { %>
       <h1>Hello, <%= user.username %></h1>
       <p>
-        <a href="/auth/sign-out">sign out</a>
+        <a href="/auth/sign-out">Sign out</a>
       </p>
     <% } else { %>
       <h1>Welcome to the Soccer Hub.</h1>
-      <h2>Dont have an account?</h2>
-      <a href="/auth/sign-up">sign up</a>
-      <a href="/auth/sign-in">sign in</a>
+      <h2>Don't have an account?</h2>
+      <a href="/auth/sign-up">Sign up</a>
+      <a href="/auth/sign-in">Sign in</a>
     <% } %>
+    
     <form action="/search" method="GET">
       <input type="text" name="player" placeholder="Enter player's name" required>
       <button type="submit">Find Favorite Player!</button>
-      <a href="/players">See All Players</a>
-
+      
+      <% if (user) { %>
+        <a href="/players">See All Players</a>
+      <% } %>
     </form>
-    <button type="submit">Your Favorites</button> </button>
-
+    
+    <% if (user) { %>
+      <button type="submit">Your Favorites</button>
+    <% } %>
   </body>
 </html>

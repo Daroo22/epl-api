@@ -12,6 +12,7 @@ import { getAllPlayers } from './utils/soccerAPIconnection.js';
 
 dotenv.config();
 const app = express();
+app.use(express.static('public'));
 
 // Set the port from environment variable or default to 3000
 const port = process.env.PORT || "3000";
@@ -67,6 +68,10 @@ app.get('/', async (req, res) => {
     teams: teamData.data
   })
 }) 
+
+
+
+//see all players
 
 app.get('/players', async (req, res) => {
   try {
