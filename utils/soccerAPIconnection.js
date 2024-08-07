@@ -8,6 +8,15 @@ const getAllPlayers = async () => {
     return response.json()
 }
 
+
+export async function searchPlayers(playerName) {
+
+    const response = await fetch(baseUrl + path)
+    const data = await response.json();
+    return data.players; 
+  }
+  
+
 export {
     getAllPlayers
 }

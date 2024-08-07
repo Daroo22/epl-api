@@ -10,6 +10,7 @@ import isSignedIn from './middleware/is-signed-in.js';
 import authController from './controllers/auth.js';
 import playerController from './controllers/players.js'
 import { getAllPlayers } from './utils/soccerAPIconnection.js';
+import {searchPlayers} from './utils/soccerAPIconnection.js'  
 
 
 dotenv.config();
@@ -86,6 +87,16 @@ app.get('/players', async (req, res) => {
   try {
     const players = await getAllPlayers();
     res.render('players', { players });
+  } catch (error) {
+    res.status(500).send('Error retrieving players');
+  }
+});
+
+app.get('/search', isSignedIn, async (req, res) => {
+  const playerName = req.query.player;
+  try {
+    const players = await searchPlayers(playerName); 
+    res.render('search-results.ejs', { players });
   } catch (error) {
     res.status(500).send('Error retrieving players');
   }
