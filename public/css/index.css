@@ -1,0 +1,115 @@
+/* General Body Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+/* Heading Styles */
+h1 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+h2 {
+    font-size: 1.5rem;
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+/* Link Styles */
+a {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 1rem;
+    margin: 0 0.5rem;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Form Styles */
+form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Input Styles */
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+/* Button Styles */
+button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Favorites Button Styles */
+.favorites-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100px; /* Adjust width */
+    height: 100px; /* Adjust height */
+    background-color: gray; /* Green color */
+    border: none; /* No border */
+    border-radius: 50%; /* Circular shape */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+    cursor: pointer;
+    font-size: 2rem; /* Adjust font size */
+    color: #fff;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    text-align: center;
+    line-height: 1.2; /* Center the emoji vertically */
+    position: relative;
+}
+
+.favorites-button:hover {
+    background-color: gray; /* Slightly different shade on hover */
+    transform: scale(1.1); /* Slightly enlarge on hover */
+}
+
+.favorites-button:focus {
+    outline: none; /* Remove default focus outline */
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.5); /* Custom focus outline */
+}
+
+.favorites-label {
+    font-size: 0.9rem;
+    color: #fff;
+    font-weight: bold;
+    margin-top: 8px;
+}

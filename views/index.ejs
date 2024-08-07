@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home Page</title>
+    <link rel="stylesheet" href="/css/index.css" /> <!-- Adjust the path if needed -->
   </head>
   <body>
     <% if (user) { %>
@@ -11,6 +12,11 @@
       <p>
         <a href="/auth/sign-out">Sign out</a>
       </p>
+      <button class="favorites-button">
+        ❤️
+        <span class="favorites-label">Favorites</span>
+    </button>
+    
     <% } else { %>
       <h1>Welcome to the Soccer Hub.</h1>
       <h2>Don't have an account?</h2>
@@ -20,15 +26,11 @@
     
     <form action="/search" method="GET">
       <input type="text" name="player" placeholder="Enter player's name" required>
-      <button type="submit">Find Favorite Player!</button>
+      <button type="submit">Find Player!</button>
       
       <% if (user) { %>
         <a href="/players">See All Players</a>
       <% } %>
     </form>
-    
-    <% if (user) { %>
-      <button type="submit">Your Favorites</button>
-    <% } %>
   </body>
 </html>

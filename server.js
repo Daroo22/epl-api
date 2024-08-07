@@ -4,6 +4,8 @@ import mongoose from 'mongoose';
 import methodOverride from 'method-override';
 import morgan from 'morgan';
 import session from 'express-session';
+import bodyParser from 'body-parser';
+import isSignedIn from './middleware/is-signed-in.js'; 
 
 import authController from './controllers/auth.js';
 import playerController from './controllers/players.js'
@@ -22,9 +24,10 @@ mongoose.connect(process.env.MONGODB_URI);
 mongoose.connection.on("connected", () => {
   console.log(`Connected to MongoDB ${mongoose.connection.name}.`);
 });
-
 // Middleware to parse URL-encoded data from forms
 app.use(express.urlencoded({ extended: false }));
+
+app.use(bodyParser.urlencoded({ extended: true }));
 // Middleware for using HTTP verbs such as PUT or DELETE
 app.use(methodOverride("_method"));
 // Morgan for logging HTTP requests
@@ -43,7 +46,13 @@ app.get('/', async (req, res) => {
   })
 })
 
-app.get('/vip-lounge', async (req, res) => {
+app.get('/search', isSignedIn, (req, res) => {
+  const playerName = req.query.player;
+  // Handle the search functionality here
+  res.send(`Searching for player: ${playerName}`);
+});
+
+app.get('/vip-lounge', async (req, res) => { 
   if (req.session.user) {
     res.send(`Welcome to the party ${req.session.user.username}`)
   }
