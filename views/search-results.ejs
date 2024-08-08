@@ -1,28 +1,26 @@
-<!-- views/search-results.ejs -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Search Results</title>
-    <link rel="stylesheet" href="/css/search-results.css" />
+    <link rel="stylesheet" href="/css/results.css" />
   </head>
   <body>
     <h1>Search Results</h1>
     <% if (players.length > 0) { %>
-      <ul>
-        <% players.forEach(player => { %>
-          <li>
-            <h2><%= player.name %></h2>
-            <p>Position: <%= player.position %></p>
-            <p>Team: <%= player.team %></p>
-        
-          </li>
-        <% }) %>
-      </ul>
+    <ul>
+      <% players.forEach(player => { %>
+      <li>
+        <h2><%= player.name %></h2>
+        <p>Jersey Number: <%= player.jersey_number%></p>
+      </li>
+      <% }) %>
+    </ul>
     <% } else { %>
-      <p>No players found.</p>
+    <p>No players found.</p>
     <% } %>
     <a href="/">Back to Home</a>
+    <a href="/favorites">Add to Favorites</a>
   </body>
-</html>
+</html>]

@@ -1,38 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home Page</title>
-    <link rel="stylesheet" href="/css/index.css" /> <!-- Adjust the path if needed -->
-  </head>
-  <body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home Page</title>
+  <link rel="stylesheet" href="/css/index.css" /> <!-- Adjust the path if needed -->
+</head>
+<body>
+  <div class="header-container">
     <% if (user) { %>
-      <h1>Hello, <%= user.username %></h1>
-      <p>
+      <div class="header-heading">Hello, <%= user.username %></div>
+      <div class="header-links">
         <a href="/auth/sign-out">Sign out</a>
-      </p>
-      <button class="favorites-button">
-        ❤️
-        <span class="favorites-label">Favorites</span>
-    </button>
-    
+      </div>
     <% } else { %>
-      <h1>Welcome to the Soccer Hub.</h1>
-      <h2>Don't have an account?</h2>
-      <a href="/auth/sign-up">Sign up</a>
-      <a href="/auth/sign-in">Sign in</a>
+      <div class="header-heading">Welcome to Soccer Hub</div>
+      <div class="header-links">
+        <a href="/auth/sign-up">Sign up</a>
+        <a href="/auth/sign-in">Sign in</a>
+      </div>
     <% } %>
-    
-    <form action="/search" method="GET">
-      <input type="text" name="player" placeholder="Enter player's name" required>
-      <button type="submit">Find Player!</button>
-    </form>
-    
-      
-      <% if (user) { %>
-        <a href="/players">See All Players</a>
-      <% } %>
-    </form>
-  </body>
+  </div>
+
+  <form action="/search" method="GET">
+    <input type="text" name="player" placeholder="Enter player's name" required>
+    <button type="submit">Find Player!</button>
+  </form>
+
+  <% if (user) { %>
+    <a href="/players">See All Players</a>
+  <% } %>
+
+  <button id="favorites-button" class="favorites-button">
+    ❤️
+    <span class="favorites-label">Favorites</span>
+  </button>
+
+  <script>
+    document.getElementById('favorites-button').addEventListener('click', function() {
+      window.location.href = '/favorites';
+    });
+  </script>
+</body>
 </html>
