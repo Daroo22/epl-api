@@ -48,11 +48,10 @@ app.get('/vip-lounge', async (req, res) => {
 app.get('/players', async (req, res) => {
   try {
     const players = await getAllPlayers();
-    console.log('Players:', players); // Log to confirm it is an array
     if (Array.isArray(players) && players.length > 0) {
       res.render('players.ejs', { players });
     } else {
-      res.render('players.ejs', { players: [] }); // Ensure it always sends an array
+      res.render('players.ejs', { players: [] }); 
     }
   } catch (error) {
     console.error('Error retrieving players:', error);

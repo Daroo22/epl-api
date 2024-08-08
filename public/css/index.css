@@ -11,17 +11,19 @@ body {
     min-height: 100vh;
 }
 
-/* Header Container Styles */
 .header-container {
+    background-size: cover; /* Ensure image covers the header */
+    background-position: center; /* Center the image */
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     padding: 10px 20px;
     position: absolute;
     top: 0;
     left: 0;
 }
+
 
 /* Heading Styles */
 .header-heading {
@@ -49,23 +51,31 @@ form {
     background: #fff;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Increased shadow for more depth */
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
     max-width: 400px;
+    margin-top: 20px; /* Add margin to separate from header */
 }
 
 /* Input Styles */
 input[type="text"] {
     width: 100%;
-    padding: 10px;
+    padding: 12px; /* Increased padding */
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 1rem;
+    transition: border-color 0.3s ease; /* Smooth transition for focus */
 }
+
+input[type="text"]:focus {
+    border-color: #007bff; /* Highlight border on focus */
+    outline: none; /* Remove default focus outline */
+}
+
 
 /* Button Styles */
 button {

@@ -5,7 +5,7 @@ const getAllPlayers = async () => {
     const path = `?api_key=${process.env.SOCCER_API_KEY}`;
     const response = await fetch(baseUrl + path);
     const data = await response.json();
-    console.log('API Response:', data); // Log the API response to check its structure
+    // console.log('API Response:', data); // Log the API response to check its structure
     return data.season_players;; // Return the entire response object
   };
   
