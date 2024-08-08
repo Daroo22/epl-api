@@ -2,12 +2,13 @@ const baseUrl = 'https://api.sportradar.com/soccer/trial/v4/en/seasons/sr%3Aseas
 
 //Get Players
 const getAllPlayers = async () => {
-    const path = `?api_key=${process.env.SOCCER_API_KEY}`
-    const response = await fetch(baseUrl + path)
-
-    return response.json()
-}
-
+    const path = `?api_key=${process.env.SOCCER_API_KEY}`;
+    const response = await fetch(baseUrl + path);
+    const data = await response.json();
+    console.log('API Response:', data); // Log the API response to check its structure
+    return data.season_players;; // Return the entire response object
+  };
+  
 
 export async function searchPlayers(playerName) {
     try {

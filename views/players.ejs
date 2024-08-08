@@ -8,11 +8,14 @@
 <body>
   <h1>Players</h1>
   <ul>
-    <% players.forEach(player => { %>
-      <li><%= player.name %> - <%= player.team %></li>
-    <% }); %>
+    <% if (Array.isArray(players) && players.length > 0) { %>
+      <% players.forEach(player => { %>
+        <li><%= player.name %> - <%= player.jersey_number %></li>
+      <% }); %>
+    <% } else { %>
+      <li>No players found.</li>
+    <% } %>
   </ul>
   <a href="/players">See All Players</a>
-
 </body>
 </html>

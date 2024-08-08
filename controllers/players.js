@@ -6,7 +6,7 @@ const router = express.Router()
 
 router.get('/', async (req, res) => {
   const playerData = await getAllPlayers()
-
+ 
   res.render('players.ejs', {
     players: playerData.season_players
   })
