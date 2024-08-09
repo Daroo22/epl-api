@@ -11,7 +11,8 @@
     <% if (players.length > 0) { %>
     <ul>
       <% players.forEach(player => { %>
-      <li>
+
+      <li>  <form action="/favorites/<%= player.id %>" method="POST">  <button>Add to Favorites</button></form>
         <h2><%= player.name %></h2>
         <p>Jersey Number: <%= player.jersey_number%></p>
       </li>
@@ -21,6 +22,6 @@
     <p>No players found.</p>
     <% } %>
     <a href="/">Back to Home</a>
-    <a href="/favorites">Add to Favorites</a>
+   
   </body>
 </html>]

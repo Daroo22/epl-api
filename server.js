@@ -6,6 +6,7 @@ import morgan from 'morgan';
 import session from 'express-session';
 import bodyParser from 'body-parser';
 import isSignedIn from './middleware/is-signed-in.js';
+import Player from './models/player.js'; 
 
 import authController from './controllers/auth.js';
 import playerController from './controllers/players.js';
@@ -73,8 +74,23 @@ app.get('/favorites', isSignedIn, async (req, res) => {
   res.render('favorites.ejs')
 })
 
+app.post('/favorites/:favoritesId', isSignedIn, async (req, res) => {
+  console.log(req.params.favoritesId)
+  // Create a new player in the database.
 
-app.use('/auth', authController);
+  // Step1: Get Player data from API using the ID
+
+  // Step2: Then do a Player.create() on MongoDB 
+
+  // Step2.5: ALSO add the new Player to the User.favorites
+
+  // Step3: Pass the favorites {} to favorites.ejs to render
+
+  res.render('favorites.ejs')
+})
+
+
+app.use('/auth', authController); 
 
 
 app.listen(port, () => {

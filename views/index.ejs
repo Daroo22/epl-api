@@ -20,16 +20,16 @@
         <a href="/auth/sign-in">Sign in</a>
       </div>
     <% } %>
-  </div>
+  </div> 
 
   <form action="/search" method="GET">
     <input type="text" name="player" placeholder="Enter player's name" required>
     <button type="submit">Find Player!</button>
   </form>
-
   <% if (user) { %>
-    <a href="/players">See All Players</a>
+    <a href="/players" class="see-all-players-button">See All Players</a>
   <% } %>
+  
 
   <button id="favorites-button" class="favorites-button">
     ❤️

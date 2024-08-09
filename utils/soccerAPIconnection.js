@@ -5,7 +5,7 @@ const getAllPlayers = async () => {
     const path = `?api_key=${process.env.SOCCER_API_KEY}`;
     const response = await fetch(baseUrl + path);
     const data = await response.json();
-    // console.log('API Response:', data); // Log the API response to check its structure
+  
     return data.season_players;; // Return the entire response object
   };
   
@@ -20,7 +20,7 @@ export async function searchPlayers(playerName) {
       const data = await response.json();
   
       // Log the full response data in a readable format
-      console.log("API data:", JSON.stringify(data, null, 2));
+    //   console.log("API data:", JSON.stringify(data, null, 2));
   
       // Filter players based on playerName
       const players = data.season_players.filter(player =>
@@ -28,7 +28,7 @@ export async function searchPlayers(playerName) {
         (player.name && player.name.toLowerCase().includes(playerName.toLowerCase())) ||
         (player.last_name && player.last_name.toLowerCase().includes(playerName.toLowerCase()))
       ); 
-  console.log('this is player ' + players)
+//   console.log('this is player ' + players)
       return players;
     } catch (error) {
        
