@@ -29,13 +29,16 @@ export async function searchPlayers(playerName) {
         (player.last_name && player.last_name.toLowerCase().includes(playerName.toLowerCase()))
       ); 
 //   console.log('this is player ' + players)
-      return players;
+      return players; 
     } catch (error) {
        
       console.error("Error fetching players:", error);
       throw error;
     }
   }
+
+
+
   
 
 export {

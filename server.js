@@ -7,6 +7,7 @@ import session from 'express-session';
 import bodyParser from 'body-parser';
 import isSignedIn from './middleware/is-signed-in.js';
 import Player from './models/player.js'; 
+import User from './models/user.js'; 
 
 import authController from './controllers/auth.js';
 import playerController from './controllers/players.js';
@@ -74,19 +75,43 @@ app.get('/favorites', isSignedIn, async (req, res) => {
   res.render('favorites.ejs')
 })
 
-app.post('/favorites/:favoritesId', isSignedIn, async (req, res) => {
-  console.log(req.params.favoritesId)
+app.post('/favorites/:playerName', isSignedIn, async (req, res) => {
+  console.log(req.params.playerName)
   // Create a new player in the database.
 
+
+// Save the player to the database
+// newPlayer.save((err, player) => {
+//     if (err) {
+//         console.error('Error saving player:', err);
+//     } else {
+//         console.log('Player saved successfully:', player);
+//     }
+// });
+
   // Step1: Get Player data from API using the ID
+  
 
   // Step2: Then do a Player.create() on MongoDB 
+  const newPlayer = await Player.create({ 
+    playerName: req.params.playerName
+  })
 
   // Step2.5: ALSO add the new Player to the User.favorites
 
-  // Step3: Pass the favorites {} to favorites.ejs to render
+  const username = req.session.user;
+  let user = await User.findOne(username);
+  user.favorites.push(newPlayer._id)
+  await user.save();
 
-  res.render('favorites.ejs')
+ user = await User.findOne( username ).populate('favorites');
+ console.log(user)
+
+  // Step3: Pass the favorites {} to favorites.ejs to render
+ 
+  res.render('favorites.ejs', {
+    favorites: user.favorites
+  })
 })
 
 

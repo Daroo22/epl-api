@@ -12,7 +12,7 @@
     <ul>
       <% players.forEach(player => { %>
 
-      <li>  <form action="/favorites/<%= player.id %>" method="POST">  <button>Add to Favorites</button></form>
+      <li>  <form action="/favorites/<%= player.name %>" method="POST">  <button>Add to Favorites</button></form>
         <h2><%= player.name %></h2>
         <p>Jersey Number: <%= player.jersey_number%></p>
       </li>

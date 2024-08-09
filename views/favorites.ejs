@@ -10,7 +10,15 @@
     <header>
         <h1>My Favorites</h1>
     </header>
-      
+    <ul>
+        <% favorites.forEach(player => { %>
+  
+        <li>  
+          <h2><%= player.playerName %></h2>
+
+        </li>
+        <% }) %>
+      </ul>
     </main>
     <footer>
         <a href="/" class="back-link">Back to Home</a>
