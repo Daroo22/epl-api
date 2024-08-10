@@ -1,26 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Home Page</title>
   <link rel="stylesheet" href="/css/index.css" />
 </head>
+
 <body>
   <div class="header-container">
     <% if (user) { %>
-      <div class="header-heading">Hello, <%= user.username %></div>
+      <div class="header-heading">Hello, <%= user.username %>
+      </div>
       <div class="header-links">
         <a href="/auth/sign-out">Sign out</a>
       </div>
-    <% } else { %>
-      <div class="header-heading">Welcome to Soccer Hub</div>
-      <div class="header-links">
-        <a href="/auth/sign-up">Sign up</a>
-        <a href="/auth/sign-in">Sign in</a>
-      </div>
-    <% } %>
-  </div> 
+      <% } else { %>
+        <div class="header-heading">Welcome to Soccer Hub</div>
+        <div class="header-links">
+          <a href="/auth/sign-up">Sign up</a>
+          <a href="/auth/sign-in">Sign in</a>
+        </div>
+        <% } %>
+  </div>
 
   <form action="/search" method="GET">
     <input type="text" name="player" placeholder="Enter player's name" required>
@@ -28,18 +31,24 @@
   </form>
   <% if (user) { %>
     <a href="/players" class="see-all-players-button">See All Players</a>
-  <% } %>
-  
+    <% } %>
 
-  <button id="favorites-button" class="favorites-button">
-    ❤️
-    <span class="favorites-label">Favorites</span>
-  </button>
 
-  <script>
-    document.getElementById('favorites-button').addEventListener('click', function() {
-      window.location.href = '/favorites';
-    });
-  </script>
+      <a href="/favorites"><button id="favorites-button" class="favorites-button">
+          ❤️ <span class="favorites-label">Favorites</span>
+        </button>
+      </a>
+
+      <a href="/profile"><button id="profile-button" class="profile-button">
+          <span class="profile-label">Profile</span>
+        </button> 
+      </a>
+
+      <script>
+        document.getElementById('favorites-button').addEventListener('click', function () {
+          window.location.href = '/favorite';
+        });
+      </script>
 </body>
+
 </html>

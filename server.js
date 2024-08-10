@@ -6,8 +6,8 @@ import morgan from 'morgan';
 import session from 'express-session';
 import bodyParser from 'body-parser';
 import isSignedIn from './middleware/is-signed-in.js';
-import Player from './models/player.js'; 
-import User from './models/user.js'; 
+import Player from './models/player.js';
+import User from './models/user.js';
 
 import authController from './controllers/auth.js';
 import playerController from './controllers/players.js';
@@ -53,7 +53,7 @@ app.get('/players', async (req, res) => {
     if (Array.isArray(players) && players.length > 0) {
       res.render('players.ejs', { players });
     } else {
-      res.render('players.ejs', { players: [] }); 
+      res.render('players.ejs', { players: [] });
     }
   } catch (error) {
     console.error('Error retrieving players:', error);
@@ -72,28 +72,57 @@ app.get('/search', isSignedIn, async (req, res) => {
 });
 
 app.get('/favorites', isSignedIn, async (req, res) => {
-  res.render('favorites.ejs')
+
+  const username = req.session.user;
+
+
+
+  let user = await User.findOne(username).populate('favorites');
+  res.render('favorites.ejs', {
+    favorites: user.favorites
+  })
+})
+
+app.get('/profile', isSignedIn, async (req, res) => {
+
+  const username = req.session.user;
+  let user = await User.findOne(username);
+  user.populate('firstname')
+  user.populate('lastname')
+  console.log(user.firstname)
+  console.log(user.lastname)
+  res.render('profile.ejs', {
+    user: user
+  })
+})
+
+app.get('/profile/update', isSignedIn, async (req, res) => {
+  let user = await User.findOne(req.session.user)
+  res.render('update.ejs') 
+})
+
+app.post('/profile/update', isSignedIn, async (req, res) => {
+  let user = await User.findOne(req.session.user)
+  const updatedProfile = await User.findByIdAndUpdate(user._id, {
+    firstname: req.body.firstname,
+    lastname: req.body.lastname
+  })
+
+  user = await User.findById(user._id)
+  res.render('profile.ejs', {
+    user: user
+  })
 })
 
 app.post('/favorites/:playerName', isSignedIn, async (req, res) => {
   console.log(req.params.playerName)
   // Create a new player in the database.
 
-
-// Save the player to the database
-// newPlayer.save((err, player) => {
-//     if (err) {
-//         console.error('Error saving player:', err);
-//     } else {
-//         console.log('Player saved successfully:', player);
-//     }
-// });
-
   // Step1: Get Player data from API using the ID
-  
+
 
   // Step2: Then do a Player.create() on MongoDB 
-  const newPlayer = await Player.create({ 
+  const newPlayer = await Player.create({
     playerName: req.params.playerName
   })
 
@@ -104,18 +133,39 @@ app.post('/favorites/:playerName', isSignedIn, async (req, res) => {
   user.favorites.push(newPlayer._id)
   await user.save();
 
- user = await User.findOne( username ).populate('favorites');
- console.log(user)
+  user = await User.findOne(username).populate('favorites');
 
   // Step3: Pass the favorites {} to favorites.ejs to render
- 
+
   res.render('favorites.ejs', {
     favorites: user.favorites
   })
 })
 
+app.delete('/favorites/:playerName', async (req, res) => {
+  await Player.findByIdAndDelete(req.params.playerName)
+  res.redirect('/favorites')
+})
 
-app.use('/auth', authController); 
+app.put('/favorites/:playerId', async (req, res) => {
+  let updatedPlayer = await Player.findById(req.params.playerId)
+  const username = req.session.user;
+  let user = await User.findOne(username);
+  const originaArray = user.favorites
+  const newArray = originaArray.map((playerId) => {
+
+    if (playerId.toString() === req.params.playerId) {
+      Player.findByIdAndUpdate()
+    } else {
+      return playerId
+    }
+    //this returns an updated favorites array but replace updated player with an objectID
+  })
+  user.favorites = newArray
+  user.save()
+})
+
+app.use('/auth', authController);
 
 
 app.listen(port, () => {

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/sign-in.css" />
+    <title>Sign In</title>
+  </head>
+  <body>
+    <h1>Profile Update</h1>
+    <form action="/profile/update" method="POST">
+      <label for="firstname">First Name:</label>
+      <input type="text" name="firstname" id="firstname" />
+      <label for="lastname">Last Name:</label>
+      <input type="text" name="lastname" id="lastname" />
+      <button type="submit">Update</button>
+      <button type="button" onclick="window.location.href='/'">Back Home</button>
+    </form>
+   
+  </body>
+</html>

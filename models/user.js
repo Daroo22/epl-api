@@ -5,14 +5,20 @@ const userSchema = mongoose.Schema({
   username: {
     type: String,
     required: true,
-
+  },
+  firstname: {
+    type: String,
+    required: true
+  },
+  lastname: {
+    type: String,
+    required: true
   },
   password: {
     type: String,
     required: true,
   },
-  favorites: [{type: mongoose.Schema.Types.ObjectId, ref: 'Player'}]
-
+  favorites: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Player' }]
 });
 
 

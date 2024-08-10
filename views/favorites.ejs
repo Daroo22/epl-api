@@ -11,15 +11,21 @@
         <h1>My Favorites</h1>
     </header>
     <ul>
-        <% favorites.forEach(player => { %>
-  
-        <li>  
-          <h2><%= player.playerName %></h2>
+        <% if (favorites && favorites.length > 0) { %>
+            <% favorites.forEach(player => { %>
+                <li>
 
-        </li>
-        <% }) %>
-      </ul>
-    </main>
+                    
+                    <h2><%= player.playerName %></h2>
+                    <form action="/favorites/<%= player._id %>?_method=DELETE" method="POST">
+                        <button type="submit">Delete <%= player.playerName %></button>
+                    </form>
+                </li>
+            <% }) %>
+        <% } else { %>
+            <li>No favorites found.</li>
+        <% } %>
+    </ul>
     <footer>
         <a href="/" class="back-link">Back to Home</a>
     </footer>

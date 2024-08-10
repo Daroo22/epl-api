@@ -33,7 +33,7 @@ export async function searchPlayers(playerName) {
     } catch (error) {
        
       console.error("Error fetching players:", error);
-      throw error;
+      throw error; 
     }
   }
 

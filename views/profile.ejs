@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="/css/profile.css">
+</head>
+<body>
+    <header>
+        <h1>My Profile</h1>
+    </header>
+    <ul>
+        <li><h2>First Name:<%= user.firstname %></h2></li>
+        <li><h2>Last Name:<%= user.lastname %></h2></li>
+    </ul>
+    <a href="/profile/update"><button id="profile-update" class="profile-update">
+        <span class="profile-label">Update Profile</span>
+      </button> 
+    </a>
+    <footer>
+        <a href="/" class="back-link">Back to Home</a>
+    </footer>
+</body>
+</html>
