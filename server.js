@@ -1,3 +1,4 @@
+// Load environment variables from .env file
 import dotenv from 'dotenv';
 import express from 'express';
 import mongoose from 'mongoose';
@@ -13,17 +14,20 @@ import authController from './controllers/auth.js';
 import playerController from './controllers/players.js';
 import { getAllPlayers, searchPlayers } from './utils/soccerAPIconnection.js';
 
+// Configure environment variables
 dotenv.config();
 const app = express();
-app.use(express.static('public'));
-app.use(express.urlencoded({ extended: false }));
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(methodOverride('_method'));
+
+// Middleware setup
+app.use(express.static('public')); 
+app.use(express.urlencoded({ extended: false })); 
+app.use(bodyParser.urlencoded({ extended: true })); 
+app.use(methodOverride('_method')); 
 app.use(morgan('dev'));
 app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: true,
+  secret: process.env.SESSION_SECRET, 
+  resave: false, 
+  saveUninitialized: true, 
 }));
 
 const port = process.env.PORT || '3000';
@@ -33,20 +37,14 @@ mongoose.connection.on('connected', () => {
   console.log(`Connected to MongoDB ${mongoose.connection.name}.`);
 });
 
+// Route to render the index page
 app.get('/', async (req, res) => {
   res.render('index.ejs', {
     user: req.session.user,
   });
 });
 
-app.get('/vip-lounge', async (req, res) => {
-  if (req.session.user) {
-    res.send(`Welcome to the party ${req.session.user.username}`);
-  } else {
-    res.redirect('/auth/sign-in');
-  }
-});
-
+// Route to display a list of all players
 app.get('/players', async (req, res) => {
   try {
     const players = await getAllPlayers();
@@ -61,6 +59,7 @@ app.get('/players', async (req, res) => {
   }
 });
 
+// Route to search players by name and render search results
 app.get('/search', isSignedIn, async (req, res) => {
   const playerName = req.query.player;
   try {
@@ -71,102 +70,75 @@ app.get('/search', isSignedIn, async (req, res) => {
   }
 });
 
+// Route to display a user's favorite players
 app.get('/favorites', isSignedIn, async (req, res) => {
-
   const username = req.session.user;
-
-
-
   let user = await User.findOne(username).populate('favorites');
   res.render('favorites.ejs', {
     favorites: user.favorites
-  })
-})
+  });
+});
 
+// Route to display a user's profile information
 app.get('/profile', isSignedIn, async (req, res) => {
-
   const username = req.session.user;
   let user = await User.findOne(username);
-  user.populate('firstname')
-  user.populate('lastname')
-  console.log(user.firstname)
-  console.log(user.lastname)
+  user.populate('firstname');
+  user.populate('lastname');
+  console.log(user.firstname);
+  console.log(user.lastname);
   res.render('profile.ejs', {
     user: user
-  })
-})
+  });
+});
 
+// Route to render the profile update form
 app.get('/profile/update', isSignedIn, async (req, res) => {
-  let user = await User.findOne(req.session.user)
-  res.render('update.ejs') 
-})
+  let user = await User.findOne(req.session.user);
+  res.render('update.ejs');
+});
 
+// Route to handle profile update form submission
 app.post('/profile/update', isSignedIn, async (req, res) => {
-  let user = await User.findOne(req.session.user)
+  let user = await User.findOne(req.session.user);
   const updatedProfile = await User.findByIdAndUpdate(user._id, {
     firstname: req.body.firstname,
     lastname: req.body.lastname
-  })
+  });
 
-  user = await User.findById(user._id)
+  user = await User.findById(user._id);
   res.render('profile.ejs', {
     user: user
-  })
-})
+  });
+});
 
+// Route to add a player to the user's favorites
 app.post('/favorites/:playerName', isSignedIn, async (req, res) => {
-  console.log(req.params.playerName)
-  // Create a new player in the database.
+  console.log(req.params.playerName);
 
-  // Step1: Get Player data from API using the ID
-
-
-  // Step2: Then do a Player.create() on MongoDB 
   const newPlayer = await Player.create({
     playerName: req.params.playerName
-  })
-
-  // Step2.5: ALSO add the new Player to the User.favorites
+  });
 
   const username = req.session.user;
   let user = await User.findOne(username);
-  user.favorites.push(newPlayer._id)
+  user.favorites.push(newPlayer._id);
   await user.save();
 
   user = await User.findOne(username).populate('favorites');
 
-  // Step3: Pass the favorites {} to favorites.ejs to render
-
   res.render('favorites.ejs', {
     favorites: user.favorites
-  })
-})
+  });
+});
 
+// Route to remove a player from the user's favorites
 app.delete('/favorites/:playerName', async (req, res) => {
-  await Player.findByIdAndDelete(req.params.playerName)
-  res.redirect('/favorites')
-})
-
-app.put('/favorites/:playerId', async (req, res) => {
-  let updatedPlayer = await Player.findById(req.params.playerId)
-  const username = req.session.user;
-  let user = await User.findOne(username);
-  const originaArray = user.favorites
-  const newArray = originaArray.map((playerId) => {
-
-    if (playerId.toString() === req.params.playerId) {
-      Player.findByIdAndUpdate()
-    } else {
-      return playerId
-    }
-    //this returns an updated favorites array but replace updated player with an objectID
-  })
-  user.favorites = newArray
-  user.save()
-})
+  await Player.findByIdAndDelete(req.params.playerName);
+  res.redirect('/favorites');
+});
 
 app.use('/auth', authController);
-
 
 app.listen(port, () => {
   console.log(`The express app is ready on port ${port}!`);

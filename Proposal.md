@@ -2,7 +2,7 @@
 
 For the second Project, I am building a Soccer API. This API will allow users to interact with their favorite premier league data, including match results, team stats, and player information. This API will also allow users to add players as their favorites to make it easy to access players they are interested in.
 
- ![Wireframes](./Assets/signIn.png) ![welcomeUser](./Assets/Welcome.png) ![create](./Assets/Screenshot%202024-08-02%20at%204.09.58 PM.png) 
+ ![Wireframes](./public/Assets/signIn.png) ![welcomeUser](./public/Assets/Welcome.png) ![create](./public/Assets/Screenshot%202024-08-02%20at%204.09.58 PM.png) 
 ## User Stories
 
  - *As a user, I want to be able to view a list of my favorite players, so that I can see all the players I am most interested in without having to search for them every time*
