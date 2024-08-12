@@ -32,7 +32,7 @@ For the second Project, I am building a Soccer API. This API will allow users to
 
 ## ERD
 
-![Erd](./Assets/ERD.png)
+![Erd](./public/Assets/ERD.png)
 
 
 

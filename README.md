@@ -16,20 +16,16 @@ My EPL API is a simple web application designed to provide users with soccer dat
 [notion](https://www.notion.so/Project-2-API-Plan-1362eb118a2844cb818609eff0aebd6a)
 
 # Attributions
-- SportsRader API: used this for providing soccer data.
-- EJS: For templating in the views.
-- Express: For building the server-side application
-- Mongoose: For interacting with MongoDB.
-- Method-Override:  For supporting PUT and DELETE HTTP methods.
-- Morgan:  For supporting PUT and DELETE HTTP methods.
-- Dotenv: For managing environment variables.
-- Body-Parser: For parsing incoming request bodies.
+- Notion
+- ChatGPT
+- SportsRadar API 
 
 
 # Technologies Used
 
-- ChatGpt
-- Notion
+- CSS
+- EJS
+- Javascript
 
 # Next Steps
 
